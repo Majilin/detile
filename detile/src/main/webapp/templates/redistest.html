@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="/js/jquery-1.4.2.js"></script>
+    <script src="/js/jquery.form.js"></script>
+
+    <script>
+        $(function () {
+            $("#gettel").bind("click", function () {
+                $.get("/sendtelnum", {"telnum": $("#tel").val()}, function (d) {
+                    if (d != -1) {
+                        gettelval(d);
+                    }
+                });
+
+            });
+
+        });
+
+        function gettelval(v) {
+            if(v==0){
+                $("#gettel").removeAttr("disabled");
+                $("#gettel").val("获取验证码");
+                return;
+            }
+            $("#gettel").attr("disabled","disabled");
+            $("#gettel").val(v + "秒");
+            v--;
+            window.setTimeout(function () {
+                gettelval(v);
+            },1000);
+
+        }
+
+    </script>
+</head>
+<body>
+
+<form id="formLogin" method="POST"
+      action="/upload1">
+    手机号码:<input id="tel"><br>
+    验证码:<input><input type="button" id="gettel" value="获取验证码" ><br>
+    <input type="submit" value="提交">
+</form>
+
+
+</body>
+</html>

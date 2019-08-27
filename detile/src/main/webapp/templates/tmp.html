@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="/js/jquery-1.4.2.js"></script>
+    <script src="/js/jquery.form.js"></script>
+
+    <script>
+        $(function() {
+            $("#formLogin").bind("submit", function() {
+                $(this).ajaxSubmit({
+                    //dataType: "json",           //html(默认), xml, script, json...接受服务端返回的类型
+                    //提交成功后的回调函数
+                    success : function(data, status, xhr, $form) {
+                        // alert(data);
+                        $("#uploadimg").attr("src",data);
+                    }
+                });
+                return false; //阻止表单默认提交
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+<form id="formLogin" method="POST" enctype="multipart/form-data"
+      action="/upload">
+    <p>
+        文件1：<input type="file" name="file"/> <br>
+        <input type="submit"  value="上传"/>
+    </p>
+</form>
+
+
+
+</body>
+</html>
