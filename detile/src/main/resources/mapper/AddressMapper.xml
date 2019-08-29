@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.detile.mapper.AddressMapper">
+  <resultMap id="selectAddressByUidMap" type="com.order.detile.domain.Address">
+    <id column="id" property="id"></id>
+    <result column="address" property="address"></result>
+    <result column="defaultid" property="defaultid"></result>
+  </resultMap>
+  <select id="selectAddressByUid" resultMap="selectAddressByUidMap" parameterType="int">
+    select a.id, a.address,a.defaultid from address a where userid=#{uid}
+  </select>
+</mapper>
